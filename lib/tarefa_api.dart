@@ -27,7 +27,7 @@ class Tarefa {
     id: json['id'],
     titulo: json['titulo'],
     descricao: json['descricao'],
-    responsavel: json['responsavel'],
+    responsavel: json['responsavelid'],
     status: json['concluida'],
     dataLimite: DateTime.parse(json['data_limite_conclusao'])
   );
@@ -36,7 +36,7 @@ class Tarefa {
     'id': id,
     'titulo': titulo,
     'descricao': descricao,
-    'responsavel': responsavel,
+    'responsavelid': responsavel,
     'concluida': status,
     'data_limite_conclusao': dataLimite.toIso8601String(),
   };
@@ -44,7 +44,7 @@ class Tarefa {
   Map<String, dynamic> toJsonForAdd() => {
     'titulo': titulo,
     'descricao': descricao,
-    'responsavel': responsavel,
+    'responsavelid': responsavel,
     'concluida': status,
     'data_limite_conclusao': dataLimite.toIso8601String(),
   };
