@@ -1,3 +1,4 @@
+import 'package:ads_labs_tarefa_flutter/tarefa_add_ui.dart';
 import 'package:ads_labs_tarefa_flutter/tarefa_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

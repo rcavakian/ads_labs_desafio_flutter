@@ -10,8 +10,8 @@ class Tarefa {
   int id;
   final String titulo;
   final String descricao;
-  final String responsavel;
-  final String status;
+  final int responsavel;
+  final bool status;
   final DateTime dataLimite;
 
   Tarefa({
@@ -58,7 +58,7 @@ class TarefaProvider extends ChangeNotifier {
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      final List<dynamic> tarefaData = data['tarefas'];
+      final List<dynamic> tarefaData = data['dados'];
       tarefas = tarefaData.map((item) => Tarefa.fromJson(item)).toList();
       notifyListeners();
     } else {
