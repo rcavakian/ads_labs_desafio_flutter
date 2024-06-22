@@ -1,6 +1,5 @@
 import 'package:ads_labs_tarefa_flutter/main.dart';
 import 'package:ads_labs_tarefa_flutter/tarefa_edit_ui.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:ads_labs_tarefa_flutter/tarefa_add_ui.dart';
 import 'package:ads_labs_tarefa_flutter/tarefa_api.dart';
@@ -78,7 +77,7 @@ class _ListaTarefaPage extends State<ListaTarefaPage> {
               }),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () => navigateToEditTarefa(),
+        onPressed: () => navigateToAddTarefa(),
       ),
     );
   }

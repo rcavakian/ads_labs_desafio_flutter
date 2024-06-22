@@ -1,5 +1,6 @@
 import 'package:ads_labs_tarefa_flutter/tarefa_add_ui.dart';
 import 'package:ads_labs_tarefa_flutter/tarefa_api.dart';
+import 'package:ads_labs_tarefa_flutter/tarefa_edit_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -107,6 +108,15 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => const AddTarefaPage()));
   }
+
+  void navigateToEditTarefa(int tarefaId) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => EditTarefaPage(tarefaId: tarefaId)
+        )
+    );
+  }
 }
 
-void navigateToEditTarefa(int tarefaId) {}
+

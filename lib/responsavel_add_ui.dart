@@ -1,7 +1,6 @@
 import 'package:ads_labs_tarefa_flutter/responsavel_api.dart';
 import 'package:flutter/material.dart' hide DatePickerTheme;
-import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
-    as dp;
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart' as dp;
 import 'package:provider/provider.dart';
 
 class AddResponsavelPage extends StatefulWidget {
@@ -34,7 +33,6 @@ class _AddResponsavelPage extends State<AddResponsavelPage> {
                   onPressed: () {
                     dp.DatePicker.showDatePicker(context,
                         showTitleActions: true,
-                        // tentar colocar regra de negocio que aceite nascidos ate 2014
                         maxTime: DateTime(2014, 12, 31),
                         onConfirm: (date) {
                       setState(() {
@@ -60,7 +58,7 @@ class _AddResponsavelPage extends State<AddResponsavelPage> {
                     } catch (error) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                            content: Text('Erro ao adicionar respomsável: $error'),
+                            content: Text('Erro ao adicionar responsável: $error'),
                         )
                       );
                     }
