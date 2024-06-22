@@ -193,12 +193,6 @@ class _AddTarefaPageState extends State<AddTarefaPage> {
                         ),
                     );
                   }
-                  // tarefaProvider.addTarefa(tarefa).then((_) {
-                  //   Navigator.pop(context);
-                  //   tarefaProvider.fetchTarefas();
-                  // }).catchError((error) {
-                  //   // Handle the error here
-                  // });
                 },
                 child: const Text('Add Tarefa'),
               ),

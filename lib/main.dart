@@ -73,8 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         const SizedBox(width: 5),
                         Text('Prazo Conclusão: ${DateFormat('yyyy-MM-dd').format(tarefa.dataLimite)}'),
                       ]),
-                      Row(
-                        children: [
+                      Row(children: [
                           const Icon(Icons.work),
                           const SizedBox(width: 5),
                           Text('${tarefa.status}'),

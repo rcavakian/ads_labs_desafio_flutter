@@ -1,6 +1,6 @@
 import 'package:ads_labs_tarefa_flutter/main.dart';
+import 'package:ads_labs_tarefa_flutter/responsavel_add_ui.dart';
 import 'package:ads_labs_tarefa_flutter/responsavel_api.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +26,7 @@ class _ListaResponsavelPage extends State<ListaResponsavelPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lista Responsaveis'),
+        title: const Text('Lista Responsáveis'),
       ),
       body: responsavelProvider.responsaveis.isEmpty
           ? const Center(child: CircularProgressIndicator())

@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 
 class AddResponsavelPage extends StatefulWidget {
   const AddResponsavelPage({super.key});
-
   @override
   State<AddResponsavelPage> createState() => _AddResponsavelPage();
 }
@@ -63,7 +62,7 @@ class _AddResponsavelPage extends State<AddResponsavelPage> {
                         SnackBar(
                             content: Text('Erro ao adicionar respomsável: $error'),
                         )
-                      )
+                      );
                     }
                   }, child: const Text('Add Responsável'),
                 )
