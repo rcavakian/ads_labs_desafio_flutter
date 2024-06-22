@@ -73,7 +73,7 @@ class TarefaProvider extends ChangeNotifier {
       headers: {"Content-Type": "application/json"},
       body: json.encode(tarefa.toJsonForAdd()),
     );
-    if (response.statusCode != 200) {
+    if (response.statusCode != 201) {
       print('Response status code: ${response.statusCode}');
       print('Response body: ${response.body}');
       throw Exception('Failed to add tarefa');
@@ -101,7 +101,7 @@ class TarefaProvider extends ChangeNotifier {
       headers: {'Content-Type': "application/json"},
       body: json.encode(updatedTarefa.toJson()),
     );
-    if (response.statusCode != 200) {
+    if (response.statusCode != 201) {
       throw Exception('Failed to edit tarefa');
     } else {
       final index = tarefas.indexWhere((tarefa) => tarefa.id == tarefaId);

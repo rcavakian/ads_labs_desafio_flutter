@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -15,15 +14,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<TarefaProvider>(
-      create: (_) => TarefaProvider(),
-      child: MaterialApp(
-        title: 'ADS Labs Flutter',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
-          useMaterial3: true,
-        ),
-        home: const MyHomePage(title: 'ADS Labs Fase 2'),
-      ));
+        create: (_) => TarefaProvider(),
+        child: MaterialApp(
+          title: 'ADS Labs Flutter',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
+            useMaterial3: true,
+          ),
+          home: const MyHomePage(title: 'ADS Labs Fase 2'),
+        ));
   }
 }
 
@@ -51,60 +50,53 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: tarefaProvider.tarefas.isEmpty
-      ? const Center(child: CircularProgressIndicator())
-      : ListView.builder(
-          itemCount: tarefaProvider.tarefas.length,
-          itemBuilder: (context, index) {
-            final tarefa = tarefaProvider.tarefas[index];
-            return ListTile(
-              title: Text(
-                tarefa.titulo,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: tarefaProvider.tarefas.length,
+              itemBuilder: (context, index) {
+                final tarefa = tarefaProvider.tarefas[index];
+                return ListTile(
+                  title: Text(
+                    tarefa.titulo,
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Icon(Icons.person_2),
-                      const SizedBox(width: 5),
-                      Text('Responsável: ${tarefa.responsavel}'),
-
+                      Row(children: [
+                        const Icon(Icons.person_2),
+                        const SizedBox(width: 5),
+                        Text('Responsável: ${tarefa.responsavel}'),
+                      ]),
+                      Row(children: [
+                        const Icon(Icons.calendar_today_outlined),
+                        const SizedBox(width: 5),
+                        Text('Prazo Conclusão: ${DateFormat('yyyy-MM-dd').format(tarefa.dataLimite)}'),
+                      ]),
+                      Row(
+                        children: [
+                          const Icon(Icons.work),
+                          const SizedBox(width: 5),
+                          Text('${tarefa.status}'),
+                        ],
+                      )
                     ],
                   ),
-                  Row(
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(Icons.calendar_today_outlined),
-                      const SizedBox(width: 5),
-                      Text('Prazo Conclusão: ${DateFormat('yyyy-MM-dd').format(tarefa.dataLimite)}'),
+                      IconButton(
+                        icon: const Icon(Icons.edit),
+                        onPressed: () => navigateToEditTarefa(tarefa.id),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.delete),
+                        onPressed: () => tarefaProvider.deleteTarefa(tarefa.id),
+                      )
                     ],
                   ),
-                  Row(
-                    children: [
-                      const Icon(Icons.work),
-                      const SizedBox(width: 5),
-                      Text('${tarefa.status}'),
-                    ],
-                  )
-                ],
-              ),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.edit),
-                    onPressed: () => navigateToEditTarefa(tarefa.id),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.delete),
-                    onPressed: () => tarefaProvider.deleteTarefa(tarefa.id),
-                  )
-
-                ],
-              ),
-            );
-          }
-      ),
+                );
+              }),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () => navigateToAddTarefa(),
@@ -113,10 +105,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void navigateToAddTarefa() {
-    Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const AddTarefaPage())
-    );
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const AddTarefaPage()));
   }
 }
 
