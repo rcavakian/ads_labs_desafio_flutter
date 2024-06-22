@@ -1,19 +1,41 @@
-import 'package:ads_labs_tarefa_flutter/main_1.dart';
-import 'package:ads_labs_tarefa_flutter/tarefa_edit_ui.dart';
-import 'package:provider/provider.dart';
 import 'package:ads_labs_tarefa_flutter/tarefa_add_ui.dart';
 import 'package:ads_labs_tarefa_flutter/tarefa_api.dart';
+import 'package:ads_labs_tarefa_flutter/tarefa_edit_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
-class ListaTarefaPage extends StatefulWidget {
-  const ListaTarefaPage({super.key});
-
-  @override
-  State<ListaTarefaPage> createState() => _ListaTarefaPage();
+void main() {
+  runApp(const MyApp());
 }
 
-class _ListaTarefaPage extends State<ListaTarefaPage> {
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider<TarefaProvider>(
+        create: (_) => TarefaProvider(),
+        child: MaterialApp(
+          title: 'ADS Labs Flutter',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
+            useMaterial3: true,
+          ),
+          home: const MyHomePage(title: 'ADS Labs Fase 2'),
+        ));
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
@@ -22,12 +44,11 @@ class _ListaTarefaPage extends State<ListaTarefaPage> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     final tarefaProvider = Provider.of<TarefaProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lista Tarefas'),
+        title: Text(widget.title),
       ),
       body: tarefaProvider.tarefas.isEmpty
           ? const Center(child: CircularProgressIndicator())
@@ -51,28 +72,29 @@ class _ListaTarefaPage extends State<ListaTarefaPage> {
                       Row(children: [
                         const Icon(Icons.calendar_today_outlined),
                         const SizedBox(width: 5),
-                        Text(
-                            'Prazo Conclusão: ${DateFormat('yyyy-MM-dd').format(tarefa.dataLimite)}'),
+                        Text('Prazo Conclusão: ${DateFormat('yyyy-MM-dd').format(tarefa.dataLimite)}'),
                       ]),
                       Row(children: [
-                        const Icon(Icons.work),
-                        const SizedBox(width: 5),
-                        Text('${tarefa.status}'),
-                      ]),
+                          const Icon(Icons.work),
+                          const SizedBox(width: 5),
+                          Text('${tarefa.status}'),
+                        ],
+                      )
                     ],
                   ),
                   trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                    IconButton(
-                      icon: const Icon(Icons.edit),
-                      onPressed: () => navigateToEditTarefa(tarefa.id),
-                    ),
-                        IconButton(
-                          icon: const Icon(Icons.delete),
-                          onPressed: () => tarefaProvider.deleteTarefa(tarefa.id),
-                        )
-                  ]),
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.edit),
+                        onPressed: () => navigateToEditTarefa(tarefa.id),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.delete),
+                        onPressed: () => tarefaProvider.deleteTarefa(tarefa.id),
+                      )
+                    ],
+                  ),
                 );
               }),
       floatingActionButton: FloatingActionButton(
@@ -81,6 +103,7 @@ class _ListaTarefaPage extends State<ListaTarefaPage> {
       ),
     );
   }
+
   void navigateToAddTarefa() {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => const AddTarefaPage()));
@@ -94,5 +117,6 @@ class _ListaTarefaPage extends State<ListaTarefaPage> {
         )
     );
   }
-
 }
+
+
