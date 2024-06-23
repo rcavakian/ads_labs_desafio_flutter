@@ -23,8 +23,8 @@ class Tarefa {
 
   bool get isPending {
     final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day); // Data de hoje sem hora
-    final deadlineDate = DateTime(dataLimite.year, dataLimite.month, dataLimite.day); // Data limite sem hora
+    final today = DateTime(now.year, now.month, now.day);
+    final deadlineDate = DateTime(dataLimite.year, dataLimite.month, dataLimite.day); 
     return !status && deadlineDate.isAtSameMomentAs(today) || deadlineDate.isAfter(today);
   }
 

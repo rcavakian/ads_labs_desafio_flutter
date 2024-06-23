@@ -27,7 +27,6 @@ class _EditTarefaPage extends State<EditTarefaPage> {
     final tarefaProvider = Provider.of<TarefaProvider>(context, listen: false);
     final tarefaId = widget.tarefaId;
 
-    // Busque os detalhes da tarefa existente e defina dataLimite de acordo
     tarefaProvider.fetchTarefaById(tarefaId).then((tarefa) {
       if (tarefa != null) {
         setState(() {
@@ -35,7 +34,7 @@ class _EditTarefaPage extends State<EditTarefaPage> {
           _descricaoController.text = tarefa.descricao;
           _responsavelController.text = tarefa.responsavel.toString();
           _statusController = tarefa.status;
-          dataLimite = tarefa.dataLimite; // Defina dataLimite a partir dos dados buscados
+          dataLimite = tarefa.dataLimite;
         });
       }
     });
@@ -109,8 +108,6 @@ class _EditTarefaPage extends State<EditTarefaPage> {
                   responsavel: _responsavelController.text.isEmpty ? existingTarefa.responsavel : int.parse(_responsavelController.text),
                   status: _statusController,
                   dataLimite: dataLimite ?? existingTarefa.dataLimite,
-                  // dataLimite: dataLimite,
-                  // dataLimite: dataLimite == DateTime.now() ? existingTarefa.dataLimite : dataLimite,
                 );
                 try {
                   await tarefaProvider.editTarefa(
