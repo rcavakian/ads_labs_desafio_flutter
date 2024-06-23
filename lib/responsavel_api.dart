@@ -40,7 +40,7 @@ class ResponsavelProvider extends ChangeNotifier {
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      final List<dynamic> responsavelData = data['responsaveis'];
+      final List<dynamic> responsavelData = data['dados'];
       responsaveis = responsavelData.map((item) => Responsavel.fromJson(item)).toList();
       notifyListeners();
     } else {
@@ -49,7 +49,7 @@ class ResponsavelProvider extends ChangeNotifier {
   }
 
   Future<void> addResponsavel(Responsavel responsavel) async {
-    const url = 'http://$localhost:3000/responsavel';
+    const url = 'http://$localhost:3000/responsavel/';
     final response = await http.post(
       Uri.parse(url),
       headers: {"Content-Type": "application/json"},

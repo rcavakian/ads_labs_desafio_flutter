@@ -3,9 +3,6 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'consts.dart';
 
-
-
-
 class Tarefa {
   int id;
   final String titulo;
