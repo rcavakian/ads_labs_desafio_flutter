@@ -23,12 +23,12 @@ class Responsavel {
   Map<String, dynamic> toJson() => {
     'id': id,
     'nome': nome,
-    'data_nascimento': dataNascimento
+    'data_nascimento': dataNascimento.toIso8601String(),
   };
 
   Map<String, dynamic> toJsonForAdd() => {
     'nome': nome,
-    'data_nascimento': dataNascimento
+    'data_nascimento': dataNascimento.toIso8601String(),
   };
 }
 
@@ -55,7 +55,7 @@ class ResponsavelProvider extends ChangeNotifier {
       headers: {"Content-Type": "application/json"},
       body: json.encode(responsavel.toJsonForAdd()),
     );
-    if (response.statusCode != 200) {
+    if (response.statusCode != 201) {
       print('Response status code: ${response.statusCode}');
       print('Response body: ${response.body}');
       throw Exception('Failed to add tarefa');
@@ -83,7 +83,7 @@ class ResponsavelProvider extends ChangeNotifier {
       headers: {'Content-Type': "application/json"},
       body: json.encode(updatedResponsavel.toJson()),
     );
-    if (response.statusCode != 200) {
+    if (response.statusCode != 201) {
       throw Exception('Failed to edit responsavel');
     } else {
       final index = responsaveis.indexWhere((responsavel) => responsavel.id == responsavelId);

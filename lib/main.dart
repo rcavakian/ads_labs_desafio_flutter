@@ -6,8 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'main_1.dart';
-
 void main() {
   runApp(const MyApp());
 }
@@ -61,13 +59,21 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
+            SizedBox(
+              width: 300,
+            child: ElevatedButton(
               onPressed: () => navigateToResponsavelListPage(),
-              child: const Text('Lista Responsáveis'),
+              style: ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20)),
+              child: const Text('List Responsáveis'),
             ),
-            ElevatedButton(
-              onPressed: () => navigateToTarefaListPage(),
-              child: const Text('Lista Tarefas'),
+            ),
+            SizedBox(
+              width: 300,
+              child: ElevatedButton(
+                onPressed: () => navigateToTarefaListPage(),
+                style: ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20)),
+                child: const Text('List Tarefas'),
+              ),
             ),
           ],
         ),

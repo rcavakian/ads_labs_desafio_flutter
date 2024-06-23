@@ -1,6 +1,7 @@
 import 'package:ads_labs_tarefa_flutter/responsavel_api.dart';
 import 'package:flutter/material.dart' hide DatePickerTheme;
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart' as dp;
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class EditResponsavelPage extends StatefulWidget {
@@ -31,18 +32,23 @@ class _EditResponsavelPage extends State<EditResponsavelPage>{
                 controller: _nomeController,
                 decoration: const InputDecoration(labelText: 'Nome'),
               ),
-              TextButton(
-                onPressed: () {
-                  dp.DatePicker.showDatePicker(context,
-                      showTitleActions: true,
-                      maxTime: DateTime(2014, 12, 31),
-                      onConfirm: (date) {
-                        setState(() {
-                          dataNascimento = date;
-                        });
-                      });
-                },
-                child: Text(dataNascimento.toString()),
+              Row(
+                children: [
+                  const Text('Data de nascimento: '),
+                  TextButton(
+                    onPressed: () {
+                      dp.DatePicker.showDatePicker(context,
+                          showTitleActions: true,
+                          maxTime: DateTime(2014, 12, 31),
+                          onConfirm: (date) {
+                            setState(() {
+                              dataNascimento = date;
+                            });
+                          });
+                    },
+                    child: Text(DateFormat('yyyy/MM/dd').format(dataNascimento)),
+                  ),
+                ],
               ),
               ElevatedButton(
                 onPressed: () async {

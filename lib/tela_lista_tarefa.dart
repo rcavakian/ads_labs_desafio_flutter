@@ -1,4 +1,3 @@
-import 'package:ads_labs_tarefa_flutter/main_1.dart';
 import 'package:ads_labs_tarefa_flutter/tarefa_edit_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:ads_labs_tarefa_flutter/tarefa_add_ui.dart';
@@ -22,7 +21,6 @@ class _ListaTarefaPage extends State<ListaTarefaPage> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     final tarefaProvider = Provider.of<TarefaProvider>(context);
 
     return Scaffold(
@@ -35,10 +33,20 @@ class _ListaTarefaPage extends State<ListaTarefaPage> {
               itemCount: tarefaProvider.tarefas.length,
               itemBuilder: (context, index) {
                 final tarefa = tarefaProvider.tarefas[index];
+                final isPending = tarefa.isPending;
                 return ListTile(
+                  contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8),
+                  tileColor: isPending
+                      ? Colors.red[50]
+                      : null,
                   title: Text(
                     tarefa.titulo,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: isPending ? Colors.red : Colors.black),
                   ),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,17 +70,18 @@ class _ListaTarefaPage extends State<ListaTarefaPage> {
                     ],
                   ),
                   trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                    IconButton(
-                      icon: const Icon(Icons.edit),
-                      onPressed: () => navigateToEditTarefa(tarefa.id),
-                    ),
-                        IconButton(
-                          icon: const Icon(Icons.delete),
-                          onPressed: () => tarefaProvider.deleteTarefa(tarefa.id),
-                        )
-                  ]),
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.edit),
+                        onPressed: () => navigateToEditTarefa(tarefa.id),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.delete),
+                        onPressed: () => tarefaProvider.deleteTarefa(tarefa.id),
+                      ),
+                    ],
+                  ),
                 );
               }),
       floatingActionButton: FloatingActionButton(
@@ -81,6 +90,7 @@ class _ListaTarefaPage extends State<ListaTarefaPage> {
       ),
     );
   }
+
   void navigateToAddTarefa() {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => const AddTarefaPage()));
@@ -90,9 +100,6 @@ class _ListaTarefaPage extends State<ListaTarefaPage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => EditTarefaPage(tarefaId: tarefaId)
-        )
-    );
+            builder: (context) => EditTarefaPage(tarefaId: tarefaId)));
   }
-
 }
